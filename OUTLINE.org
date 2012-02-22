@@ -1,0 +1,81 @@
+* Laziness: The Good, The Bad, and the Ugly
+  1. Introduction
+     1. About Me
+        1. Employed by Sonian, one of the first companies to use Clojure
+           commercially.  Been there writing Clojure for 2 years.  We develop a
+           data archiving product.
+        2. My initial foray into Clojure was to get Clojure to work with
+           Terracotta.  Met Alex then and submitted a couple of bug fixes to
+           Terracotta.  I was able to use the JSwat debugger to debug clojure
+           and java code at the same time.  It was pretty wild!
+        3. Contributor to Clojure.  Submitted a patch to fix a bug in Clojure
+           where multi-methods were holding the head of their arguments.  I came
+           up with the idea for remove.  Every time Phil uses remove he thinks,
+           "Thanks, Paul!"  I pushed to get a 1.2.1 released with a fix for the
+           Keyword intern bug.  I discovered a bug the way Clojure's (1.3)
+           persistent collections hash keys.
+     2. The promise of laziness
+        1. Infinite sequences.  It is sometimes more natural (or more useful) to
+           express a solution using infinite sequences.
+           
+           TODO: example
+        2. Efficient. You only do the amount of work that is needed, and no
+           more.  Use only the amount of memory that is needed, and no more.
+           
+           EXAMPLE: several nested calls to map process a single item through
+           each mapped function with each force, as opposed to fully processing
+           the whole seq with the inner layers on the first force.
+        3. Treat seqs as control structures.  A lazy seq is a loop.  It's a way
+           to do tail recursive calls and now blow stack.
+  2. Evaluation
+     1. Order of evaluation in Clojure
+        1. Evaluates function first, then each argument, then calls the function
+           with the arguments.
+           
+           TODO: example
+     2. Lazy evaluation
+        1. Evaluates the function, then calls the function with the unevaluated
+           arguments.
+           
+           TODO: example
+     3. Macros
+        1. Receive (at compile time) the unevaluated arguments, and returns code
+           that will be compiled.
+           
+           TODO: example
+  3. What is a seq?
+     1. A very specific thing. An object that implements ISeq (first, rest,
+        more, cons).
+  4. How lazy sequences work
+     1. It wasn't always this way, it used to be more traditionally Lispy,
+        but to have fully lazy sequences rest needed to not realize any part
+        of the sequence.  rest needed to realize the first item in a sequence
+        to see whether it should return nil.
+     2. As a result, Clojure doesn't really have nil punning for sequences.
+
+        TODO: example
+     3. seq, first, rest, next
+           
+        TODO: example
+     4. The compiler does locals clearing
+        1. Util.ret1
+        2. This has caused problems for debuggers
+  5. Chunked sequences
+     1. Can be used to realize in chunks to exploit efficiencies.
+     2. range is chunked
+        
+        TODO: example
+     3. PersistentVectors are chunked when seq'ed
+        
+        TODO: example
+  6. Tour de core: lazy-seq and its ilk
+  7. Writing your own lazy sequences
+  8. Pitfalls
+     1. Heap overflow
+        1. Holding onto the head
+        2. Chunking
+     2. Stack overflow
+     3. Escaping context
+     4. REPL problems
+  9. See Also: delay, future, promise
+     1. delay allows you to delay a computation until you force it with a deref.
