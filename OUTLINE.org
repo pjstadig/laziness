@@ -1,3 +1,5 @@
+#-*- mode: org -*-
+#+STARTUP: hidestars showall
 * Laziness: The Good, The Bad, and the Ugly
   1. Introduction
      1. About Me
@@ -57,7 +59,8 @@
      3. seq, first, rest, next
            
         TODO: example
-     4. The compiler does locals clearing
+     4. The compiler does locals clearing ??? what does locals clearing do?
+        Only in the tail position?
         1. Util.ret1
         2. This has caused problems for debuggers
   5. Chunked sequences
@@ -68,14 +71,15 @@
      3. PersistentVectors are chunked when seq'ed
         
         TODO: example
-  6. Tour de core: lazy-seq and its ilk
-  7. Writing your own lazy sequences
+  6. 20min
+  7. Tour de core: lazy-seq and its ilk
   8. Pitfalls
-     1. Heap overflow
+     1. Escaping context
+     2. Heap overflow
         1. Holding onto the head
         2. Chunking
-     2. Stack overflow
-     3. Escaping context
+     3. Stack overflow
      4. REPL problems
-  9. See Also: delay, future, promise
-     1. delay allows you to delay a computation until you force it with a deref.
+  9. Writing your own lazy sequences
+  10. See Also: delay, future, promise
+      1. delay allows you to delay a computation until you force it with a deref.
