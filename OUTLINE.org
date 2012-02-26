@@ -20,13 +20,15 @@
         1. Infinite sequences.  It is sometimes more natural (or more useful) to
            express a solution using infinite sequences.
            
-           TODO: example
+           (filter odd? (range 100))
         2. Efficient. You only do the amount of work that is needed, and no
            more.  Use only the amount of memory that is needed, and no more.
            
            EXAMPLE: several nested calls to map process a single item through
            each mapped function with each force, as opposed to fully processing
            the whole seq with the inner layers on the first force.
+
+           SLIDE
         3. Treat seqs as control structures.  A lazy seq is a loop.  It's a way
            to do tail recursive calls and now blow stack.
   2. Evaluation
@@ -61,8 +63,9 @@
         TODO: example
      4. The compiler does locals clearing ??? what does locals clearing do?
         Only in the tail position?
-        1. Util.ret1
-        2. This has caused problems for debuggers
+        1. RestFn
+        2. Util.ret1
+        3. This has caused problems for debuggers
   5. Chunked sequences
      1. Can be used to realize in chunks to exploit efficiencies.
      2. range is chunked
@@ -80,6 +83,5 @@
         2. Chunking
      3. Stack overflow
      4. REPL problems
-  9. Writing your own lazy sequences
-  10. See Also: delay, future, promise
-      1. delay allows you to delay a computation until you force it with a deref.
+  9. See Also: delay, future, promise
+     1. delay allows you to delay a computation until you force it with a deref.
