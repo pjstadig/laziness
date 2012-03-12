@@ -83,5 +83,7 @@
         2. Chunking
      3. Stack overflow
      4. REPL problems
+        1. print-length
+        2. print-depth
   9. See Also: delay, future, promise
      1. delay allows you to delay a computation until you force it with a deref.
