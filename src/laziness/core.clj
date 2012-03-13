@@ -1,8 +1,10 @@
-(ns laziness.core)
+(ns laziness.core
+  (:require [clojure.repl :refer [find-doc]]))
+
 ;;~~~~~~~~~~~~~~~~~~~~~~
 ;; LAZY-SEQ AND ITS ILK
 ;;~~~~~~~~~~~~~~~~~~~~~~
-(find-doc #"lazy")
+;; (find-doc #"lazy")
 
 ;;=================
 ;; BUILDING BLOCKS
@@ -17,7 +19,7 @@
 ;;   is called, and will cache the result and return it on all subsequent
 ;;   seq calls. See also - realized?
 
-lazy-seq
+;; lazy-seq
 
 ;; -------------------------
 ;; clojure.core/realized?
