@@ -16,12 +16,11 @@
            "Thanks, Paul!"  I pushed to get a 1.2.1 released with a fix for the
            Keyword intern bug.  I discovered a bug the way Clojure's (1.3)
            persistent collections hash keys.
-     2. The promise of laziness
+     2. The promise of laziness (promise.clj)
         1. Infinite sequences.  It is sometimes more natural (or more useful) to
-           express a solution using infinite sequences.
-           
-           (filter odd? (range 100))
-        2. Efficient. You only do the amount of work that is needed, and no
+           express a solution using infinite sequences.  More declarative
+        2. Treat seqs as control structures.  A lazy seq is a loop.
+        3. Efficient. You only do the amount of work that is needed, and no
            more.  Use only the amount of memory that is needed, and no more.
            
            EXAMPLE: several nested calls to map process a single item through
@@ -29,55 +28,41 @@
            the whole seq with the inner layers on the first force.
 
            SLIDE
-        3. Treat seqs as control structures.  A lazy seq is a loop.  It's a way
-           to do tail recursive calls and now blow stack.
-  2. Evaluation
+  2. Evaluation (evaluation.clj)
      1. Order of evaluation in Clojure
-        1. Evaluates function first, then each argument, then calls the function
-           with the arguments.
-           
-           TODO: example
-     2. Lazy evaluation
-        1. Evaluates the function, then calls the function with the unevaluated
-           arguments.
-           
-           TODO: example
+        1. function first
+        2. then each argument
+        3. then calls the function with the arguments.
+     2. Lazy evaluation:
+        1. evaluates the function
+        2. then calls the function with the unevaluated arguments.
      3. Macros
-        1. Receive (at compile time) the unevaluated arguments, and returns code
-           that will be compiled.
-           
-           TODO: example
-  3. What is a seq?
-     1. A very specific thing. An object that implements ISeq (first, rest,
-        more, cons).
+        1. receive (at compile time) the unevaluated arguments
+        2. returns code that will be compiled.
+  3. What is a seq? (seq.clj)
+     1. A very specific thing. An object that implements ISeq
+     2. first: the first element in the sequence
+     3. rest: a (possibly empty, but never nil) sequence of the rest of the elements
   4. How lazy sequences work
      1. It wasn't always this way, it used to be more traditionally Lispy,
         but to have fully lazy sequences rest needed to not realize any part
         of the sequence.  rest needed to realize the first item in a sequence
         to see whether it should return nil.
-     2. As a result, Clojure doesn't really have nil punning for sequences.
-
-        TODO: example
-     3. seq, first, rest, next
-           
-        TODO: example
-     4. The compiler does locals clearing ??? what does locals clearing do?
-        Only in the tail position?
-        1. RestFn
+     2. As a result, to do nil punning in Clojure you need to use first and
+        next, not first and rest.
+     3. first, rest, seq, next
+     4. The compiler does locals clearing
+        1. RT.count
         2. Util.ret1
         3. This has caused problems for debuggers
-  5. Chunked sequences
+  5. Chunked sequences (chunking.clj)
      1. Can be used to realize in chunks to exploit efficiencies.
-     2. range is chunked
-        
-        TODO: example
+     2. range is chunked when seq'ed
      3. PersistentVectors are chunked when seq'ed
-        
-        TODO: example
-  6. 20min
-  7. Tour de core: lazy-seq and its ilk
-  8. Pitfalls
+  6. Tour de core: lazy-seq and its ilk
+  7. Pitfalls
      1. Escaping context
+        1. Errors happening far from where they actually occurred.
      2. Heap overflow
         1. Holding onto the head
         2. Chunking
@@ -85,5 +70,5 @@
      4. REPL problems
         1. print-length
         2. print-depth
-  9. See Also: delay, future, promise
+  8. See Also: delay, future, promise
      1. delay allows you to delay a computation until you force it with a deref.
