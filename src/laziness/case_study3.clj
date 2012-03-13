@@ -10,3 +10,15 @@
 
 ;; (concat-n [:a] 5)
 ;; (concat-n [:a] 4000)
+
+;;========================
+;; What is going on here?
+;;========================
+
+;; (lazy-seq
+;;   (lazy-seq
+;;     (lazy-seq
+;;       (lazy-seq
+;;         (lazy-seq
+;;           (lazy-seq
+;;             (lazy-seq ...)))))))
