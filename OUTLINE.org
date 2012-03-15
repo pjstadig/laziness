@@ -16,6 +16,7 @@
            "Thanks, Paul!"  I pushed to get a 1.2.1 released with a fix for the
            Keyword intern bug.  I discovered a bug the way Clojure's (1.3)
            persistent collections hash keys.
+        4. Thanks to Lauren!
      2. The promise of laziness (promise.clj)
         1. Infinite sequences.  It is sometimes more natural (or more useful) to
            express a solution using infinite sequences.  More declarative
@@ -59,16 +60,16 @@
      1. Can be used to realize in chunks to exploit efficiencies.
      2. range is chunked when seq'ed
      3. PersistentVectors are chunked when seq'ed
-  6. Tour de core: lazy-seq and its ilk
+  6. Tour de core: lazy-seq and its ilk (core.clj)
   7. Pitfalls
-     1. Escaping context
+     1. Escaping context (core.clj)
         1. Errors happening far from where they actually occurred.
-     2. Heap overflow
+     2. Heap overflow (case_study2.clj)
         1. Holding onto the head
         2. Chunking
-     3. Stack overflow
-     4. REPL problems
-        1. print-length
-        2. print-depth
+     3. Stack overflow (case_study3.clj)
+     4. REPL problems (repl_problems.clj)
+        1. *print-length*
+        2. *print-level*
   8. See Also: delay, future, promise
      1. delay allows you to delay a computation until you force it with a deref.

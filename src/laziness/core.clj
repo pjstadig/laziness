@@ -287,6 +287,7 @@
 ;;   Returns a lazy seq of the elements of coll separated by sep
 
 (interpose '| [1 2 3])
+;;=> (1 | 2 | 3)
 
 ;; -------------------------
 ;; clojure.core/iterate
@@ -295,6 +296,7 @@
 ;;   side-effects
 
 (take 5 (iterate inc 1))
+;;=> (1 2 3 4 5)
 
 ;;============================
 ;; SOME COOL USES OF LAZINESS
